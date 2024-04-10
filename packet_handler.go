@@ -95,6 +95,8 @@ func handleLobbyStartRequest(ctx *Context, packet networking.LobbyStartRequest) 
 func handleLobbyStartAccepted(ctx *Context, packet networking.LobbyStartAccepted) ClientState {
 	if ctx.Lobby.hosting && ctx.Lobby.Ready {
 		logging.Log("Game is starting")
+		// Reset the game state before showing the game board
+		ctx.GameState = chess.CreateState()
 		return MY_TURN
 	}
 	return ctx.ClientState
